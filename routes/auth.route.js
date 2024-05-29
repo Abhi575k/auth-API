@@ -4,7 +4,7 @@ const createError = require('http-errors')
 
 const User = require('../models/user.model')
 const { registerSchema, loginSchema } = require('../utilities/validation')
-const { signAccessToken, signRefreshToken } = require('../utilities/jwt')
+const { signAccessToken, signRefreshToken, verifyAccessToken } = require('../utilities/jwt')
 
 
 router.post('/register', async (req, res, next) => {
@@ -59,7 +59,19 @@ router.post('/login', async (req, res, next) => {
 })
 
 router.post('/refresh-token', async (req, res, next) => {
-    res.send('Refresh Token')
+    try {
+        const { refreshToken } = req.body
+        if (!refreshToken)
+            throw createError.BadRequest()
+        const userId = await verifyRefreshToken(refreshToken)
+
+        const accessToken = await signAccessToken(userId)
+        const refToken = await signRefreshToken(userId)
+
+        res.send({ accessToken: accessToken, refreshToken: refToken })
+    } catch (err) {
+        next(err)
+    }
 })
 
 router.delete('/logout', async (req, res, next) => {
