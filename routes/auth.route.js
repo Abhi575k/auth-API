@@ -3,7 +3,7 @@ const router = express.Router()
 const createError = require('http-errors')
 
 const User = require('../models/user.model')
-const { UserSchema } = require('../utilities/validation.UserSchema')
+const { registerSchema, loginSchema } = require('../utilities/validation')
 const { signAccessToken } = require('../utilities/jwt')
 
 
@@ -11,8 +11,7 @@ router.post('/register', async (req, res, next) => {
     console.log(req.body)
     try {
         // check if the request body is complete
-        const result = await UserSchema.validateAsync(req.body)
-        console.log(result)
+        const result = await registerSchema.validateAsync(req.body)
 
         // check if user with email already exists
         const doesExist = await User.findOne({ email: result.email })
@@ -24,15 +23,36 @@ router.post('/register', async (req, res, next) => {
         const savedUser = await user.save()
         const accessToken = await signAccessToken(savedUser.id)
 
-        res.send(accessToken)
+        res.send({ accessToken })
     } catch (err) {
-        if (err.isJoi === true) error.status = 422
+        if (err.isJoi === true)
+            return next(createError.BadRequest())
         next(err)
     }
 })
 
 router.post('/login', async (req, res, next) => {
-    res.send('Login')
+    try {
+        // check if the request body is complete
+        const result = await loginSchema.validateAsync(req.body)
+
+        // check if user with email already exists
+        const user = await User.findOne({ email: result.email })
+        if (!user)
+            throw createError.NotFound('User not found.')
+
+        // check if password is correct
+        const isMatch = await user.isValidPassword(result.password)
+        if (!isMatch)
+            throw createError.Unauthorized('Username or password is incorrect.')
+
+        const accessToken = await signAccessToken(user.id)
+        res.send({ accessToken })
+    } catch (err) {
+        if (err.isJoi === true)
+            return next(createError.BadRequest('Invalid username or password.'))
+        next(err)
+    }
 })
 
 router.post('/refresh-token', async (req, res, next) => {
@@ -42,11 +62,5 @@ router.post('/refresh-token', async (req, res, next) => {
 router.delete('/logout', async (req, res, next) => {
     res.send('Logout')
 })
-
-
-
-
-
-
 
 module.exports = router
