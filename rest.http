@@ -1,5 +1,5 @@
 GET http://localhost:3000/
-Authorization: Bearer <token>
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiYWNjZXNzIiwiaWF0IjoxNzE3MDE3MjM1LCJleHAiOjE3MTcwMjA4MzUsImF1ZCI6IjY2NTc1YTRlNzMwN2MwNmRiZTc3MzJhOCIsImlzcyI6ImxvY2FsaG9zdCJ9.PF_nmfgux8t7Btn5UqABOPRiyPulW6dgZ1wrXpiHHM4
 
 
 #### Register
@@ -27,4 +27,12 @@ Content-Type: application/json
 
 {
     "refreshToken": "<refreshToken>"
+}
+
+#### Logout
+DELETE http://localhost:3000/auth/logout
+Content-Type: application/json
+
+{
+    "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoicmVmcmVzaCIsImlhdCI6MTcxNzAxNzMzMiwiZXhwIjoxNzQ4NTc0OTMyLCJhdWQiOiI2NjU3NWE0ZTczMDdjMDZkYmU3NzMyYTgiLCJpc3MiOiJsb2NhbGhvc3QifQ.ddn95cAMzZ1pw_VJTl94Tq49kkAeJzgGYCqD3ziQ_SA"
 }
