@@ -4,7 +4,7 @@ const createError = require('http-errors')
 
 const User = require('../models/user.model')
 const { registerSchema, loginSchema } = require('../utilities/validation')
-const { signAccessToken } = require('../utilities/jwt')
+const { signAccessToken, signRefreshToken } = require('../utilities/jwt')
 
 
 router.post('/register', async (req, res, next) => {
@@ -22,8 +22,9 @@ router.post('/register', async (req, res, next) => {
         const user = new User(result)
         const savedUser = await user.save()
         const accessToken = await signAccessToken(savedUser.id)
+        const refreshToken = await signRefreshToken(savedUser.id)
 
-        res.send({ accessToken })
+        res.send({ accessToken, refreshToken })
     } catch (err) {
         if (err.isJoi === true)
             return next(createError.BadRequest())
@@ -47,7 +48,9 @@ router.post('/login', async (req, res, next) => {
             throw createError.Unauthorized('Username or password is incorrect.')
 
         const accessToken = await signAccessToken(user.id)
-        res.send({ accessToken })
+        const refreshToken = await signRefreshToken(user.id)
+
+        res.send({ accessToken, refreshToken })
     } catch (err) {
         if (err.isJoi === true)
             return next(createError.BadRequest('Invalid username or password.'))
