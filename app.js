@@ -4,14 +4,15 @@ const createError = require('http-errors')
 
 require('dotenv').config()
 require('./utilities/init.mongodb')
+require('./utilities/init.redis')
 
 const authRoute = require('./routes/auth.route')
 const { verifyAccessToken } = require('./utilities/jwt')
 
+
 const app = express()
 app.use(morgan('dev'))
 app.use(express.json())
-// app.use(express.urlencoded({ extended: true }))
 
 app.get('/', verifyAccessToken, async (req, res, next) => {
     res.send('Hello World')

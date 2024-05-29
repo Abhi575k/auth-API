@@ -1,6 +1,8 @@
 const JWT = require('jsonwebtoken')
 const createError = require('http-errors')
 
+const client = require('./init.redis')
+
 require('dotenv').config()
 
 module.exports = {
@@ -40,6 +42,13 @@ module.exports = {
                     console.log(err.message)
                     return reject(createError.InternalServerError())
                 }
+                client.SET(userId, token, 'EX', 31536000, (err, reply) => {
+                    if (err) {
+                        console.log(err.message)
+                        reject(createError.InternalServerError())
+                        return
+                    }
+                })
                 resolve(token)
             })
         })
@@ -64,6 +73,15 @@ module.exports = {
             JWT.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET, (err, payload) => {
                 if (err) return reject(createError.Unauthorized())
                 const userId = payload.aud
+                client.GET(userId, (err, result) => {
+                    if (err) {
+                        console.log(err.message)
+                        reject(createError.InternalServerError())
+                        return
+                    }
+                    if (refreshToken === result) return resolve(userId)
+                    reject(createError.Unauthorized())
+                })
                 resolve(userId)
             })
         })
