@@ -7,7 +7,7 @@ const Profile = require('../models/profile.model')
 const { registerSchema, loginSchema } = require('../utilities/validation')
 const { signAccessToken, signRefreshToken, verifyAccessToken, verifyRefreshToken, unsignToken } = require('../utilities/jwt')
 
-const client = require('../utilities/init.redis')
+const client = require('../config/init.redis')
 const githubRouter = require('./github.route')
 
 router.post('/register', async (req, res, next) => {

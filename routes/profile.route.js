@@ -1,11 +1,13 @@
 const express = require('express')
 const router = express.Router()
 const createError = require('http-errors')
+const { check, validationResult } = require('express-validator');
 
 const Profile = require('../models/profile.model')
 const User = require('../models/user.model')
 
 const { verifyAccessToken } = require('../utilities/jwt')
+const upload = require('../config/multer')
 
 router.get('/', verifyAccessToken, async (req, res, next) => {
     try {
@@ -53,6 +55,43 @@ router.patch('/update', verifyAccessToken, async (req, res, next) => {
         next(err)
     }
 })
+
+// updating profile picture
+router.patch('/update/photo/upload', [verifyAccessToken, upload.single('photo')], async (req, res, next) => {
+    if (!req.file)
+        throw createError.BadRequest('Please upload a file.')
+    try {
+        const profile = await Profile.findOne({ user: req.payload.aud })
+        if (!profile)
+            throw createError.NotFound('Profile not found.')
+        profile.photo = req.file.buffer
+        await profile.save()
+        res.send(profile)
+    } catch (err) {
+        next(err)
+    }
+})
+
+// updating profile picture using URL
+router.patch('/update/photo/url', [verifyAccessToken, [check('photo', 'Photo URL is required').isURL(),]], async (req, res) => {
+    const errors = validationResult(req)
+    if (!errors.isEmpty())
+        return res.status(400).json({ errors: errors.array() })
+    try {
+        const profile = await Profile.findOne({ user: req.payload.aud })
+        if (!profile)
+            return res.status(404).json({ msg: 'Profile not found' })
+        profile.photo = req.body.photo
+        await profile.save()
+        res.json(profile)
+    } catch (err) {
+        console.error(err.message)
+        res.status(500).send('Server Error')
+    }
+})
+
+
+// router.patch('/update/picture/delete', verifyAccessToken, async (req, res, next) => {
 
 router.delete('/delete', verifyAccessToken, async (req, res, next) => {
     try {

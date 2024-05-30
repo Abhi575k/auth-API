@@ -3,8 +3,8 @@ const morgan = require('morgan')
 const createError = require('http-errors')
 
 require('dotenv').config()
-require('./utilities/init.mongodb')
-require('./utilities/init.redis')
+require('./config/init.mongodb')
+require('./config/init.redis')
 
 const authRoute = require('./routes/auth.route')
 const githubRoute = require('./routes/github.route')

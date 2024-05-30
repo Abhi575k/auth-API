@@ -1,7 +1,7 @@
 const JWT = require('jsonwebtoken')
 const createError = require('http-errors')
 
-const client = require('./init.redis')
+const client = require('../config/init.redis')
 
 require('dotenv').config()
 
@@ -13,7 +13,7 @@ module.exports = {
             }
             const secret = process.env.ACCESS_TOKEN_SECRET
             const options = {
-                expiresIn: '1m',
+                expiresIn: '1h',
                 issuer: 'localhost',
                 audience: userId
             }
