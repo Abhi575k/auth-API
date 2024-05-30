@@ -14,7 +14,8 @@ router.get('/', verifyAccessToken, async (req, res, next) => {
         const user = await User.findById(req.payload.aud)
         if (!user)
             throw createError.NotFound('User not found.')
-        if (user.isAdmin() === true) {
+        const isAdmin = await user.isAdmin()
+        if (isAdmin === true) {
             const profiles = await Profile.find().populate('user', 'name email')
             return res.send(profiles)
         } else {
