@@ -1,14 +1,13 @@
 GET http://localhost:3000/
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiYWNjZXNzIiwiaWF0IjoxNzE3MDE3MjM1LCJleHAiOjE3MTcwMjA4MzUsImF1ZCI6IjY2NTc1YTRlNzMwN2MwNmRiZTc3MzJhOCIsImlzcyI6ImxvY2FsaG9zdCJ9.PF_nmfgux8t7Btn5UqABOPRiyPulW6dgZ1wrXpiHHM4
-
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiYWNjZXNzIiwiaWF0IjoxNzE3MDgzOTgzLCJleHAiOjE3MTcwODQ1ODMsImF1ZCI6IjY2NTg2YWJiZWU1MzM2OGVmNmU4ODkxNCIsImlzcyI6ImxvY2FsaG9zdCJ9.Q_Kd1Y7-slGCQcBtEGF5gOWd-EcMF_b8Be9xRnXWW8U
 
 #### Register
 POST http://localhost:3000/auth/register
 Content-Type: application/json
 
 {
-    "name": "abc",
-    "email": "temp7@gmail.com",
+    "name": "temp",
+    "email": "temp9@gmail.com",
     "password": "123456"
 }
 
@@ -17,7 +16,7 @@ POST http://localhost:3000/auth/login
 Content-Type: application/json
 
 {
-    "email": "temp7@gmail.com",
+    "email": "temp9@gmail.com",
     "password": "123456"
 }
 
@@ -31,11 +30,16 @@ Content-Type: application/json
 
 #### Logout
 DELETE http://localhost:3000/auth/logout
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiYWNjZXNzIiwiaWF0IjoxNzE3MDgzOTgzLCJleHAiOjE3MTcwODQ1ODMsImF1ZCI6IjY2NTg2YWJiZWU1MzM2OGVmNmU4ODkxNCIsImlzcyI6ImxvY2FsaG9zdCJ9.Q_Kd1Y7-slGCQcBtEGF5gOWd-EcMF_b8Be9xRnXWW8U
 Content-Type: application/json
 
 {
-    "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoicmVmcmVzaCIsImlhdCI6MTcxNzAxNzY0NiwiZXhwIjoxNzQ4NTc1MjQ2LCJhdWQiOiI2NjU3NWE0ZTczMDdjMDZkYmU3NzMyYTgiLCJpc3MiOiJsb2NhbGhvc3QifQ.qoLmFGe26y5UUa4qm3j8Fq6ExfYNARM1LEulSllZZAQ"
+    "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoicmVmcmVzaCIsImlhdCI6MTcxNzA4Mzk4MywiZXhwIjoxNzQ4NjQxNTgzLCJhdWQiOiI2NjU4NmFiYmVlNTMzNjhlZjZlODg5MTQiLCJpc3MiOiJsb2NhbGhvc3QifQ.uYPOFiQGBBnaMSUAwqAmbfVRdmi3sDWrxAaYSyHd0is"
 }
+
+#### Profile
+GET http://localhost:3000/profile
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiYWNjZXNzIiwiaWF0IjoxNzE3MDY5Nzc2LCJleHAiOjE3MTcwNzMzNzYsImF1ZCI6IjY2NTc2ZWU5YTZhNTQ0NmU4MDFhYTNkOCIsImlzcyI6ImxvY2FsaG9zdCJ9.HbVCyc1nfQnIG0fS9zCbMFI5BbRSljITQMpwzy6r3D8
 
 #### Profile /view
 GET http://localhost:3000/profile/view

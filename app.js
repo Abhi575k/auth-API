@@ -22,7 +22,7 @@ app.get('/', verifyAccessToken, async (req, res, next) => {
 })
 
 app.use('/auth', authRoute)
-app.use('/auth/github', githubRoute)
+// app.use('/auth/github', githubRoute)
 app.use('/profile', profileRoute)
 
 app.use(async (req, res, next) => {

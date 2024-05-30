@@ -1,9 +1,3 @@
-// view - user can view their profile and all the public profiles
-// update - user can update their profile
-// delete - user can delete their profile
-// admin - user can view, update, and delete all profiles
-
-// Path: routes/profile.route.js
 const express = require('express')
 const router = express.Router()
 const createError = require('http-errors')
@@ -13,22 +7,22 @@ const User = require('../models/user.model')
 
 const { verifyAccessToken } = require('../utilities/jwt')
 
-// router.get('/', verifyAccessToken, async (req, res, next) => {
-//     try {
-//         const user = await User.findById(req.payload.aud)
-//         if (!user)
-//             throw createError.NotFound('User not found.')
-//         if (user.role === 'admin') {
-//             const profiles = await 
-//             return res.send(profiles)
-//         } else {
-//             const profiles = await Profile.find({ visibility: 'public' }).populate('user', 'name email')
-//             return res.send(profiles)
-//         }
-//     } catch (err) {
-//         next(err)
-//     }
-// })
+router.get('/', verifyAccessToken, async (req, res, next) => {
+    try {
+        const user = await User.findById(req.payload.aud)
+        if (!user)
+            throw createError.NotFound('User not found.')
+        if (user.isAdmin() === true) {
+            const profiles = await Profile.find().populate('user', 'name email')
+            return res.send(profiles)
+        } else {
+            const profiles = await Profile.find({ visibility: 'public' }).populate('user', 'name email')
+            return res.send(profiles)
+        }
+    } catch (err) {
+        next(err)
+    }
+})
 
 router.get('/view', verifyAccessToken, async (req, res, next) => {
     try {

@@ -51,5 +51,9 @@ UserSchema.methods.isValidPassword = async function (password) {
     }
 }
 
+UserSchema.methods.isAdmin = async function () {
+    return this.role === 'admin'
+}
+
 const User = mongoose.model('user', UserSchema);
 module.exports = User;

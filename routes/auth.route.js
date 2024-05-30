@@ -5,7 +5,7 @@ const createError = require('http-errors')
 const User = require('../models/user.model')
 const Profile = require('../models/profile.model')
 const { registerSchema, loginSchema } = require('../utilities/validation')
-const { signAccessToken, signRefreshToken, verifyAccessToken, verifyRefreshToken } = require('../utilities/jwt')
+const { signAccessToken, signRefreshToken, verifyAccessToken, verifyRefreshToken, unsignToken } = require('../utilities/jwt')
 
 const client = require('../utilities/init.redis')
 const githubRouter = require('./github.route')
@@ -65,7 +65,7 @@ router.post('/login', async (req, res, next) => {
     }
 })
 
-router.post('/refresh-token', async (req, res, next) => {
+router.post('/refresh-token', verifyAccessToken, async (req, res, next) => {
     try {
         const { refreshToken } = req.body
         if (!refreshToken)
@@ -81,7 +81,7 @@ router.post('/refresh-token', async (req, res, next) => {
     }
 })
 
-router.delete('/logout', async (req, res, next) => {
+router.delete('/logout', verifyAccessToken, async (req, res, next) => {
     try {
         const { refreshToken } = req.body
         if (!refreshToken)
@@ -93,7 +93,13 @@ router.delete('/logout', async (req, res, next) => {
                 throw createError.InternalServerError()
             }
         })
+        // blacklist access token
+        // const accessToken = req.headers['authorization'].split(' ')[1]
+        // unsignToken(accessToken)
         console.log('Deleted from redis')
+        // send message successfully logged out
+        message = 'Successfully logged out.'
+        res.send({ message })
         res.sendStatus(204)
     } catch (err) {
         next(err)

@@ -13,7 +13,7 @@ module.exports = {
             }
             const secret = process.env.ACCESS_TOKEN_SECRET
             const options = {
-                expiresIn: '1h',
+                expiresIn: '1m',
                 issuer: 'localhost',
                 audience: userId
             }
@@ -59,6 +59,15 @@ module.exports = {
         const authHeader = req.headers['authorization']
         const bearerToken = authHeader.split(' ')
         const token = bearerToken[1]
+        // // check if token is valid
+        // client.GET(token, (err, reply) => {
+        //     console.log('redis fetch')
+        //     if (err) {
+        //         console.log(err.message)
+        //         throw createError.InternalServerError()
+        //     }
+        //     if (reply) return next(createError.Unauthorized())
+        // })
         JWT.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, payload) => {
             if (err) {
                 const message = err.name === 'JsonWebTokenError' ? 'Unauthorized' : err.message
@@ -84,6 +93,14 @@ module.exports = {
                 })
                 resolve(userId)
             })
+        })
+    },
+    unsignToken: (token) => {
+        client.SET(token, 'invalid', { EX: 3600 }, (err, reply) => {
+            if (err) {
+                console.log(err.message)
+                throw createError.InternalServerError()
+            }
         })
     }
 }
