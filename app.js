@@ -22,7 +22,7 @@ app.get('/', verifyAccessToken, async (req, res, next) => {
 })
 
 app.use('/auth', authRoute)
-// app.use('/auth/github', githubRoute)
+app.use('/auth/github', githubRoute)
 app.use('/profile', profileRoute)
 
 app.use(async (req, res, next) => {
@@ -30,6 +30,9 @@ app.use(async (req, res, next) => {
 })
 
 app.use((err, req, res, next) => {
+    // check if response headers have been sent
+    if (res.headersSent)
+        return
     res.status(err.status || 500)
     res.send({
         error: {

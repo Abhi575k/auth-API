@@ -123,6 +123,20 @@ router.patch('/update/photo/url', [verifyAccessToken, [check('photo', 'Photo URL
     }
 })
 
+router.patch('/update/photo/delete', verifyAccessToken, async (req, res, next) => {
+    try {
+        const profile = await
+            Profile.findOne({ user: req.payload.aud })
+        if (!profile)
+            throw createError.NotFound('Profile not found.')
+        profile.photo = undefined
+        await profile.save()
+        res.send(profile)
+    } catch (err) {
+        next(err)
+    }
+})
+
 
 // router.patch('/update/picture/delete', verifyAccessToken, async (req, res, next) => {
 

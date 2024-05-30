@@ -2,6 +2,7 @@ const passport = require('passport');
 const GitHubStrategy = require('passport-github2').Strategy;
 const express = require('express');
 const User = require('../models/user.model');
+const Profile = require('../models/profile.model');
 
 const router = express.Router();
 require('dotenv').config();
@@ -26,12 +27,27 @@ passport.use(
                     role: 'user',
                 });
                 await user.save();
+                const profileData = new Profile({
+                    user: user._id,
+                    bio: 'This is a github user',
+                    visibility: 'private',
+                });
+                await profileData.save();
                 // console.log(user);
                 return cb(null, profile);
             } else {
                 console.log('Github user already exist in DB..');
-                // console.log(profile);
-                return cb(null, profile);
+                console.log(profile);
+                const req = {
+                    profile: {
+                        id: profile.id,
+                        displayName: profile.displayName,
+                        provider: profile.provider,
+                    },
+                    accessToken: accessToken,
+                    refreshToken: refreshToken,
+                }
+                return cb(null, req);
             }
         }
     )
