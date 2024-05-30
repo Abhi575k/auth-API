@@ -16,7 +16,7 @@ POST http://localhost:3000/auth/login
 Content-Type: application/json
 
 {
-    "email": "temp9@gmail.com",
+    "email": "temp7@gmail.com",
     "password": "123456"
 }
 
@@ -39,19 +39,34 @@ Content-Type: application/json
 
 #### Profile
 GET http://localhost:3000/profile
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiYWNjZXNzIiwiaWF0IjoxNzE3MDY5Nzc2LCJleHAiOjE3MTcwNzMzNzYsImF1ZCI6IjY2NTc2ZWU5YTZhNTQ0NmU4MDFhYTNkOCIsImlzcyI6ImxvY2FsaG9zdCJ9.HbVCyc1nfQnIG0fS9zCbMFI5BbRSljITQMpwzy6r3D8
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiYWNjZXNzIiwiaWF0IjoxNzE3MDg3NTU4LCJleHAiOjE3MTcwOTExNTgsImF1ZCI6IjY2NTg2YWJiZWU1MzM2OGVmNmU4ODkxNCIsImlzcyI6ImxvY2FsaG9zdCJ9.ziJElDpgVOQMoB1cxPUhTbtdZLX2BQbCiSA746E6s5A
 
 #### Profile /view
 GET http://localhost:3000/profile/view
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiYWNjZXNzIiwiaWF0IjoxNzE3MDY3NDQ3LCJleHAiOjE3MTcwNzEwNDcsImF1ZCI6IjY2NTg1ZWFmNjYzZjUwMzllZWU1YWM1MCIsImlzcyI6ImxvY2FsaG9zdCJ9.AR4QaJV1rFesHTELKktVPjU8zB9yn1_U0pvalkpdm6A
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiYWNjZXNzIiwiaWF0IjoxNzE3MDg3NTU4LCJleHAiOjE3MTcwOTExNTgsImF1ZCI6IjY2NTg2YWJiZWU1MzM2OGVmNmU4ODkxNCIsImlzcyI6ImxvY2FsaG9zdCJ9.ziJElDpgVOQMoB1cxPUhTbtdZLX2BQbCiSA746E6s5A
 
 #### Profile /update
 PATCH http://localhost:3000/profile/update
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiYWNjZXNzIiwiaWF0IjoxNzE3MDY3NDQ3LCJleHAiOjE3MTcwNzEwNDcsImF1ZCI6IjY2NTg1ZWFmNjYzZjUwMzllZWU1YWM1MCIsImlzcyI6ImxvY2FsaG9zdCJ9.AR4QaJV1rFesHTELKktVPjU8zB9yn1_U0pvalkpdm6A
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiYWNjZXNzIiwiaWF0IjoxNzE3MDg3NTU4LCJleHAiOjE3MTcwOTExNTgsImF1ZCI6IjY2NTg2YWJiZWU1MzM2OGVmNmU4ODkxNCIsImlzcyI6ImxvY2FsaG9zdCJ9.ziJElDpgVOQMoB1cxPUhTbtdZLX2BQbCiSA746E6s5A
 Content-Type: application/json
 
 {
-    "phone": "6666"
+    "name": "chunchunmaru",
+    "email": "chunchunmaru@gmail.com",
+    "bio": "I like thick thighs",
+    "phone": "1234567890",
+    "visibility": "public"
+}
+
+#### Profile /update/password
+PATCH http://localhost:3000/profile/update/password
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiYWNjZXNzIiwiaWF0IjoxNzE3MDg4MzU5LCJleHAiOjE3MTcwOTE5NTksImF1ZCI6IjY2NTg2NTA1YzMzMTRlYzMxMjhlZjNjNSIsImlzcyI6ImxvY2FsaG9zdCJ9.I4WuocumenVJ8ThFqNppCrLw5Ut51dcOjV1mONo9QNU
+Content-Type: application/json
+
+{
+    "oldPassword": "123456",
+    "password1": "1234567",
+    "password2": "1234567"
 }
 
 #### Profile /update/photo/upload

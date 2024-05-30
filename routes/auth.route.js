@@ -51,7 +51,7 @@ router.post('/login', async (req, res, next) => {
 
         // check if password is correct
         const isMatch = await user.isValidPassword(result.password)
-        if (!isMatch)
+        if (isMatch === false)
             throw createError.Unauthorized('Username or password is incorrect.')
 
         const accessToken = await signAccessToken(user.id)

@@ -40,17 +40,49 @@ router.get('/view', verifyAccessToken, async (req, res, next) => {
 
 router.patch('/update', verifyAccessToken, async (req, res, next) => {
     try {
-        const allowedUpdates = ['name', 'bio', 'visibility']
+        const allowedProfileUpdates = ['bio', 'phone', 'visibility']
+        const allowedUserUpdates = ['name', 'email']
         const updates = Object.keys(req.body);
-        const isValidOperation = updates.every(update => allowedUpdates.includes(update));
+        const isValidOperation = updates.every(update => allowedProfileUpdates.includes(update) || allowedUserUpdates.includes(update))
+        // sepaarate update sfor user and profile
+        const profileUpdates = updates.filter(update => allowedProfileUpdates.includes(update))
+        const userUpdates = updates.filter(update => allowedUserUpdates.includes(update))
         if (!isValidOperation)
             throw createError.BadRequest('Invalid updates.')
         const profile = await Profile.findOne({ user: req.payload.aud })
+        const user = await User.findById(req.payload.aud)
         if (!profile)
             throw createError.NotFound('Profile not found.')
-        updates.forEach(update => profile[update] = req.body[update])
+        if (!user)
+            throw createError.NotFound('User not found.')
+        profileUpdates.forEach(update => profile[update] = req.body[update])
+        userUpdates.forEach(update => user[update] = req.body[update])
         await profile.save()
+        await user.save()
         res.send(profile)
+    } catch (err) {
+        next(err)
+    }
+})
+
+router.patch('/update/password', verifyAccessToken, async (req, res, next) => {
+    try {
+        const user = await User.findById(req.payload.aud)
+        if (!user)
+            throw createError.NotFound('User not found.')
+        oldPass = req.body.oldPassword
+        pass1 = req.body.password1
+        pass2 = req.body.password2
+        if (!oldPass || !pass1 || !pass2)
+            throw createError.BadRequest('All fields are required.')
+        const isMatch = await user.isValidPassword(oldPass)
+        if (isMatch === false)
+            throw createError.BadRequest('Invalid password.')
+        if (pass1 !== pass2)
+            throw createError.BadRequest('Passwords do not match.')
+        user.password = pass1
+        await user.save()
+        res.send(user)
     } catch (err) {
         next(err)
     }
