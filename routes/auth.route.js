@@ -81,14 +81,14 @@ router.delete('/logout', async (req, res, next) => {
         if (!refreshToken)
             throw createError.BadRequest()
         const userId = await verifyRefreshToken(refreshToken)
-        client.DEL(userId, (err, val) => {
+        client.sendCommand(['DEL', userId], (err, value) => {
             if (err) {
                 console.log(err.message)
                 throw createError.InternalServerError()
             }
-            console.log(val)
-            res.sendStatus(204)
         })
+        console.log('Deleted from redis')
+        res.sendStatus(204)
     } catch (err) {
         next(err)
     }

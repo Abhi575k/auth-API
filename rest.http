@@ -8,7 +8,7 @@ Content-Type: application/json
 
 {
     "name": "abc",
-    "email": "temp5@gmail.com",
+    "email": "temp6@gmail.com",
     "password": "123456"
 }
 
@@ -26,7 +26,7 @@ POST http://localhost:3000/auth/refresh-token
 Content-Type: application/json
 
 {
-    "refreshToken": "<refreshToken>"
+    "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoicmVmcmVzaCIsImlhdCI6MTcxNzAxNzYyOSwiZXhwIjoxNzQ4NTc1MjI5LCJhdWQiOiI2NjU3NWE0ZTczMDdjMDZkYmU3NzMyYTgiLCJpc3MiOiJsb2NhbGhvc3QifQ.yA0IbuXk--ovo5gOfG8FVHwe_NBQOgM7ErL5pC0Y1zA"
 }
 
 #### Logout
@@ -34,5 +34,5 @@ DELETE http://localhost:3000/auth/logout
 Content-Type: application/json
 
 {
-    "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoicmVmcmVzaCIsImlhdCI6MTcxNzAxNzMzMiwiZXhwIjoxNzQ4NTc0OTMyLCJhdWQiOiI2NjU3NWE0ZTczMDdjMDZkYmU3NzMyYTgiLCJpc3MiOiJsb2NhbGhvc3QifQ.ddn95cAMzZ1pw_VJTl94Tq49kkAeJzgGYCqD3ziQ_SA"
+    "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoicmVmcmVzaCIsImlhdCI6MTcxNzAxNzY0NiwiZXhwIjoxNzQ4NTc1MjQ2LCJhdWQiOiI2NjU3NWE0ZTczMDdjMDZkYmU3NzMyYTgiLCJpc3MiOiJsb2NhbGhvc3QifQ.qoLmFGe26y5UUa4qm3j8Fq6ExfYNARM1LEulSllZZAQ"
 }

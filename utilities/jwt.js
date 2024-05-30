@@ -42,7 +42,7 @@ module.exports = {
                     console.log(err.message)
                     return reject(createError.InternalServerError())
                 }
-                client.SET(userId, token, 'EX', 31536000, (err, reply) => {
+                client.SET(userId, token, { EX: 31536000 }, (err, reply) => {
                     if (err) {
                         console.log(err.message)
                         reject(createError.InternalServerError())
