@@ -1,5 +1,5 @@
 GET http://localhost:3000/
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiYWNjZXNzIiwiaWF0IjoxNzE3MDgzOTgzLCJleHAiOjE3MTcwODQ1ODMsImF1ZCI6IjY2NTg2YWJiZWU1MzM2OGVmNmU4ODkxNCIsImlzcyI6ImxvY2FsaG9zdCJ9.Q_Kd1Y7-slGCQcBtEGF5gOWd-EcMF_b8Be9xRnXWW8U
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiYWNjZXNzIiwiaWF0IjoxNzE3MDkwNTE1LCJleHAiOjE3MTcwOTQxMTUsImF1ZCI6IjY2NTg2NjdkYzMzMTRlYzMxMjhlZjNkMiIsImlzcyI6ImxvY2FsaG9zdCJ9.BEwa-Vlm4mVTYRFzVZu7LFBrJsiYnxSIeh_TF2dE7WQ
 
 #### Register
 POST http://localhost:3000/auth/register
@@ -7,7 +7,7 @@ Content-Type: application/json
 
 {
     "name": "temp",
-    "email": "temp9@gmail.com",
+    "email": "temp10@gmail.com",
     "password": "123456"
 }
 
@@ -30,16 +30,17 @@ Content-Type: application/json
 
 #### Logout
 DELETE http://localhost:3000/auth/logout
-Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiYWNjZXNzIiwiaWF0IjoxNzE3MDgzOTgzLCJleHAiOjE3MTcwODQ1ODMsImF1ZCI6IjY2NTg2YWJiZWU1MzM2OGVmNmU4ODkxNCIsImlzcyI6ImxvY2FsaG9zdCJ9.Q_Kd1Y7-slGCQcBtEGF5gOWd-EcMF_b8Be9xRnXWW8U
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiYWNjZXNzIiwiaWF0IjoxNzE3MDk2NjUwLCJleHAiOjE3MTcxMDAyNTAsImF1ZCI6IjY2NTg2NjdkYzMzMTRlYzMxMjhlZjNkMiIsImlzcyI6ImxvY2FsaG9zdCJ9.7SJKEot64Jqts1_pGuMBAjl_bkCNuKVcNe1wxNwZkFw
 Content-Type: application/json
 
 {
-    "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoicmVmcmVzaCIsImlhdCI6MTcxNzA4Mzk4MywiZXhwIjoxNzQ4NjQxNTgzLCJhdWQiOiI2NjU4NmFiYmVlNTMzNjhlZjZlODg5MTQiLCJpc3MiOiJsb2NhbGhvc3QifQ.uYPOFiQGBBnaMSUAwqAmbfVRdmi3sDWrxAaYSyHd0is"
+    "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoicmVmcmVzaCIsImlhdCI6MTcxNzA5NjY1MCwiZXhwIjoxNzQ4NjU0MjUwLCJhdWQiOiI2NjU4NjY3ZGMzMzE0ZWMzMTI4ZWYzZDIiLCJpc3MiOiJsb2NhbGhvc3QifQ.GkDB9EwkwMBwELQn7ndVPaau1-SdqVvbMggQ3C4JDlg"
 }
 
 #### Profile
 GET http://localhost:3000/profile
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiYWNjZXNzIiwiaWF0IjoxNzE3MDg4OTcwLCJleHAiOjE3MTcwOTI1NzAsImF1ZCI6IjY2NTg2NjdkYzMzMTRlYzMxMjhlZjNkMiIsImlzcyI6ImxvY2FsaG9zdCJ9.BC7w1yQg_qBlHWgyX1vYuaCWE9gAiMaZ1k5jZhdLjC0
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiYWNjZXNzIiwiaWF0IjoxNzE3MDg4OTE0LCJleHAiOjE3MTcwOTI1MTQsImF1ZCI6IjY2NThiMjkyMjhmZmFmMTVkNjg4NWYwNyIsImlzcyI6ImxvY2FsaG9zdCJ9.K_LHZD0Dzj7zIFFwtMZfF2Agh5bLpJoNHgOzU9XO4k4
+
 
 #### Profile /view
 GET http://localhost:3000/profile/view
