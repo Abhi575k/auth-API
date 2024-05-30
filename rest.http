@@ -8,7 +8,7 @@ Content-Type: application/json
 
 {
     "name": "abc",
-    "email": "temp6@gmail.com",
+    "email": "temp7@gmail.com",
     "password": "123456"
 }
 
@@ -17,7 +17,7 @@ POST http://localhost:3000/auth/login
 Content-Type: application/json
 
 {
-    "email": "temp1@gmail.com",
+    "email": "temp7@gmail.com",
     "password": "123456"
 }
 
@@ -36,6 +36,23 @@ Content-Type: application/json
 {
     "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoicmVmcmVzaCIsImlhdCI6MTcxNzAxNzY0NiwiZXhwIjoxNzQ4NTc1MjQ2LCJhdWQiOiI2NjU3NWE0ZTczMDdjMDZkYmU3NzMyYTgiLCJpc3MiOiJsb2NhbGhvc3QifQ.qoLmFGe26y5UUa4qm3j8Fq6ExfYNARM1LEulSllZZAQ"
 }
+
+#### Profile /view
+GET http://localhost:3000/profile/view
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiYWNjZXNzIiwiaWF0IjoxNzE3MDY3NDQ3LCJleHAiOjE3MTcwNzEwNDcsImF1ZCI6IjY2NTg1ZWFmNjYzZjUwMzllZWU1YWM1MCIsImlzcyI6ImxvY2FsaG9zdCJ9.AR4QaJV1rFesHTELKktVPjU8zB9yn1_U0pvalkpdm6A
+
+#### Profile /update
+PATCH http://localhost:3000/profile/update
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiYWNjZXNzIiwiaWF0IjoxNzE3MDY3NDQ3LCJleHAiOjE3MTcwNzEwNDcsImF1ZCI6IjY2NTg1ZWFmNjYzZjUwMzllZWU1YWM1MCIsImlzcyI6ImxvY2FsaG9zdCJ9.AR4QaJV1rFesHTELKktVPjU8zB9yn1_U0pvalkpdm6A
+Content-Type: application/json
+
+{
+    "phone": "6666"
+}
+
+#### Profile /delete
+DELETE http://localhost:3000/profile/delete
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiYWNjZXNzIiwiaWF0IjoxNzE3MDY3NDQ3LCJleHAiOjE3MTcwNzEwNDcsImF1ZCI6IjY2NTg1ZWFmNjYzZjUwMzllZWU1YWM1MCIsImlzcyI6ImxvY2FsaG9zdCJ9.AR4QaJV1rFesHTELKktVPjU8zB9yn1_U0pvalkpdm6A
 
 #### Github
 GET http://localhost:3000/auth/github

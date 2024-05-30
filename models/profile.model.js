@@ -6,16 +6,13 @@ const ProfileSchema = new mongoose.Schema({
         ref: 'user'
     },
     bio: {
-        type: String,
-        default: none
+        type: String
     },
     phone: {
-        type: String,
-        default: none
+        type: String
     },
     photo: {
-        type: String,
-        default: none
+        type: String
     },
     visibility: {
         type: String,
@@ -25,3 +22,6 @@ const ProfileSchema = new mongoose.Schema({
 }, {
     timestamps: true
 });
+
+const Profile = mongoose.model('profile', ProfileSchema);
+module.exports = Profile;

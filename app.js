@@ -8,6 +8,7 @@ require('./utilities/init.redis')
 
 const authRoute = require('./routes/auth.route')
 const githubRoute = require('./routes/github.route')
+const profileRoute = require('./routes/profile.route')
 
 const { verifyAccessToken } = require('./utilities/jwt')
 
@@ -22,6 +23,7 @@ app.get('/', verifyAccessToken, async (req, res, next) => {
 
 app.use('/auth', authRoute)
 app.use('/auth/github', githubRoute)
+app.use('/profile', profileRoute)
 
 app.use(async (req, res, next) => {
     next(createError.NotFound())

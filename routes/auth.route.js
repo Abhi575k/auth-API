@@ -3,6 +3,7 @@ const router = express.Router()
 const createError = require('http-errors')
 
 const User = require('../models/user.model')
+const Profile = require('../models/profile.model')
 const { registerSchema, loginSchema } = require('../utilities/validation')
 const { signAccessToken, signRefreshToken, verifyAccessToken, verifyRefreshToken } = require('../utilities/jwt')
 
@@ -25,6 +26,10 @@ router.post('/register', async (req, res, next) => {
         const savedUser = await user.save()
         const accessToken = await signAccessToken(savedUser.id)
         const refreshToken = await signRefreshToken(savedUser.id)
+
+        // create a new profile for the user
+        const profile = new Profile({ user: savedUser.id })
+        await profile.save()
 
         res.send({ accessToken, refreshToken })
     } catch (err) {
