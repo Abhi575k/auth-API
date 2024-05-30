@@ -20,6 +20,7 @@
   "homepage": "https://github.com/Abhi575k/auth-API#readme",
   "dependencies": {
     "@hapi/joi": "^17.1.1",
+    "axios": "^1.7.2",
     "bcryptjs": "^2.4.3",
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
@@ -29,6 +30,8 @@
     "mongoose": "^8.4.0",
     "morgan": "^1.10.0",
     "nodemon": "^3.1.1",
+    "passport": "^0.7.0",
+    "passport-github2": "^0.1.12",
     "redis": "^4.6.14",
     "redis-commander": "^0.8.0"
   }

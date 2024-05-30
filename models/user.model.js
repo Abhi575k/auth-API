@@ -15,13 +15,12 @@ const UserSchema = new Schema({
         lowercase: true,
         unique: true
     },
-    googleId: {
+    githubID: {
         type: String,
         default: null
     },
     password: {
         type: String,
-        required: true,
         trim: true
     },
     role: {

@@ -36,3 +36,6 @@ Content-Type: application/json
 {
     "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoicmVmcmVzaCIsImlhdCI6MTcxNzAxNzY0NiwiZXhwIjoxNzQ4NTc1MjQ2LCJhdWQiOiI2NjU3NWE0ZTczMDdjMDZkYmU3NzMyYTgiLCJpc3MiOiJsb2NhbGhvc3QifQ.qoLmFGe26y5UUa4qm3j8Fq6ExfYNARM1LEulSllZZAQ"
 }
+
+#### Github
+GET http://localhost:3000/auth/github

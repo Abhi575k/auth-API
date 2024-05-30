@@ -7,6 +7,7 @@ const { registerSchema, loginSchema } = require('../utilities/validation')
 const { signAccessToken, signRefreshToken, verifyAccessToken, verifyRefreshToken } = require('../utilities/jwt')
 
 const client = require('../utilities/init.redis')
+const githubRouter = require('./github.route')
 
 router.post('/register', async (req, res, next) => {
     console.log(req.body)
@@ -93,5 +94,7 @@ router.delete('/logout', async (req, res, next) => {
         next(err)
     }
 })
+
+// router.get('/github', githubRouter)
 
 module.exports = router

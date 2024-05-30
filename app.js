@@ -7,6 +7,8 @@ require('./utilities/init.mongodb')
 require('./utilities/init.redis')
 
 const authRoute = require('./routes/auth.route')
+const githubRoute = require('./routes/github.route')
+
 const { verifyAccessToken } = require('./utilities/jwt')
 
 
@@ -19,6 +21,7 @@ app.get('/', verifyAccessToken, async (req, res, next) => {
 })
 
 app.use('/auth', authRoute)
+app.use('/auth/github', githubRoute)
 
 app.use(async (req, res, next) => {
     next(createError.NotFound())
